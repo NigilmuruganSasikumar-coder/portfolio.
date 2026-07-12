@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ============================================================
+       META & SEO TAGS
+       These tags help search engines and social media understand 
+       your website.
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Nigilmurugan Sasikumar – Freelance Web Developer & Founder of NISITE WEBCRAFT. Building modern, responsive, and stunning websites." />
+  <meta name="keywords" content="Nigilmurugan Sasikumar, NISITE WEBCRAFT, Freelance Web Developer, Portfolio, Web Design" />
+  <meta name="author" content="Nigilmurugan Sasikumar" />
+
+  <!-- Open Graph Tags (for sharing on Facebook, LinkedIn, etc.) -->
+  <meta property="og:title" content="Nigilmurugan Sasikumar | NISITE WEBCRAFT" />
+  <meta property="og:description"
+    content="Freelance Web Developer & Founder of NISITE WEBCRAFT. Creating premium digital experiences." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nisitewebcraft.com" />
+
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nigilmurugan Sasikumar | NISITE WEBCRAFT" />
+  <meta name="twitter:description" content="Freelance Web Developer & Founder of NISITE WEBCRAFT." />
+
+  <title>Nigilmurugan Sasikumar | NISITE WEBCRAFT</title>
+
+  <!-- ============================================================
+       GOOGLE FONTS
+       We import two fonts:
+       - "Space Grotesk" for headings (modern & bold)
+       - "Inter" for body text (clean & readable)
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- ============================================================
+       GSAP ANIMATION LIBRARY
+       GSAP (GreenSock Animation Platform) is used for smooth,
+       professional animations throughout the site.
+  ============================================================ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Link to our CSS file -->
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       CUSTOM CURSOR
+       Two elements create the cursor effect:
+       1. .cursor-dot   – small sharp dot that follows exactly
+       2. .cursor-ring  – larger ring that follows with a delay
+  ============================================================ -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ============================================================
+       LOADING SCREEN
+       Shown when the page first loads. Fades out after loading.
+  ============================================================ -->
+  <div class="loader-screen" id="loaderScreen">
+    <!-- Animated logo text -->
+    <div class="loader-logo">
+      <span class="loader-logo-text">NISITE</span>
+      <span class="loader-logo-accent">WEBCRAFT</span>
+    </div>
+    <!-- Progress bar that fills up during loading -->
+    <div class="loader-bar-wrapper">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <!-- Percentage counter -->
+    <div class="loader-percent" id="loaderPercent">0%</div>
+  </div>
+
+  <!-- ============================================================
+       ANIMATED BACKGROUND
+       Canvas element where we draw the particle system.
+       This sits behind everything else on the page.
+  ============================================================ -->
+  <canvas class="bg-canvas" id="bgCanvas"></canvas>
+
+  <!-- ============================================================
+       BACKGROUND FLOATING SHAPES
+       These decorative shapes float and move in the background.
+  ============================================================ -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       Glass-effect navbar that sticks to the top of the page.
+       Becomes more opaque when you scroll down.
+  ============================================================ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main Navigation">
+    <!-- Brand Logo (left side) -->
+    <div class="nav-logo">
+      <span class="nav-logo-text">NISITE <span class="nav-logo-accent">WEBCRAFT</span></span>
+    </div>
+
+    <!-- Hamburger button for mobile -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+      <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+      <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+      <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+      <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
+      <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ============================================================
+       MAIN CONTENT WRAPPER
+  ============================================================ -->
+  <main>
+
+    <!-- ============================================================
+         SECTION 1: HOME
+         Split layout – profile image left, intro text right
+    ============================================================ -->
+    <section class="section home-section" id="home" aria-label="Home">
+      <div class="home-container">
+
+        <!-- LEFT: Profile Image Placeholder -->
+        <div class="home-image-wrapper" data-parallax="0.05">
+          <div class="profile-image-box">
+            <div class="profile-placeholder">
+              <img src="img/my image.jpeg" alt="Profile image is not founded">
+            </div>
+            <!-- Decorative ring around image -->
+            <div class="profile-ring"></div>
+            <div class="profile-ring profile-ring-2"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Intro Text -->
+        <div class="home-content">
+          <p class="home-greeting">Hello World 👋</p>
+
+          <h1 class="home-title">
+            Hi, I'm<br />
+            <span class="home-name">Nigilmurugan<br />Sasikumar</span>
+          </h1>
+
+          <!-- Typing effect container -->
+          <div class="home-typing-wrapper">
+            <span class="home-typing-prefix">I am a </span>
+            <span class="home-typing-text" id="typingText"></span>
+            <span class="typing-cursor">|</span>
+          </div>
+
+          <p class="home-intro">
+            Freelance Web Developer & Founder of <strong>NISITE WEBCRAFT</strong>.
+            I craft modern, responsive digital experiences that blend clean code with stunning design.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="home-buttons">
+            <a href="#" class="btn btn-primary magnetic-btn" aria-label="Download Resume">
+              <span>Download Resume</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7,10 12,15 17,10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </a>
+            <a href="#projects" class="btn btn-secondary magnetic-btn" aria-label="View Projects">
+              <span>View Projects</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12,5 19,12 12,19" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="home-socials">
+            <a href="#" class="social-icon magnetic-btn" aria-label="GitHub" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+              </svg>
+            </a>
+            <a href="https://wa.me/919095388843" class="social-icon magnetic-btn" aria-label="WhatsApp" target="_blank" rel="noopener">
+               <svg viewBox="0 0 32 32" fill="currentColor">
+                 <path d="M16.04 3C8.84 3 3 8.73 3 15.8c0 2.5.73 4.82 1.99 6.8L3 29l6.61-1.91a13.1 13.1 0 0 0 6.43 1.67c7.2 0 13.04-5.73 13.04-12.8S23.24 3 16.04 3zm0 23.43a10.8 10.8 0 0 1-5.51-1.51l-.39-.23-3.92 1.13 1.18-3.8-.25-.39a10.48 10.48 0 0 1-1.64-5.63c0-5.85 4.73-10.6 10.53-10.6s10.53 4.75 10.53 10.6-4.73 10.43-10.53 10.43zm5.77-7.9c-.32-.16-1.88-.92-2.17-1.02-.29-.1-.5-.16-.71.16-.21.31-.81 1.02-.99 1.23-.18.21-.36.24-.67.08-.32-.16-1.33-.49-2.54-1.57-.94-.84-1.58-1.88-1.76-2.2-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.72-.98-2.36-.26-.63-.52-.54-.71-.55h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63 0 1.54 1.13 3.03 1.29 3.24.16.21 2.22 3.36 5.38 4.71.75.32 1.34.51 1.8.65.76.24 1.46.21 2.01.13.61-.09 1.88-.77 2.15-1.51.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.61-.37z"/>
+                </svg>
+            </a>
+            <a href="#" class="social-icon magnetic-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a href="#" class="social-icon magnetic-btn" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+              </svg>
+            </a>
+            <a href="mailto:hello@nisitewebcraft.com" class="social-icon magnetic-btn" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll Down</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LOGO / BRAND SECTION
+         A premium card showcasing the NISITE WEBCRAFT brand
+    ============================================================ -->
+    <section class="section logo-section" id="brand" aria-label="Brand">
+      <div class="section-container">
+        <div class="logo-card glass-card">
+          <!-- Glowing animated border -->
+          <div class="logo-glow-border"></div>
+
+          <!-- Logo placeholder -->
+          <div class="logo-placeholder">
+            <img src="img/logo.jpeg" alt="">
+          </div>
+
+          <div class="logo-card-content">
+            <h2 class="logo-brand-name">NISITE <span class="accent">WEBCRAFT</span></h2>
+            <p class="logo-brand-tagline">Crafting Digital Excellence</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: ABOUT
+         Glass card with personal info and a mini timeline
+    ============================================================ -->
+    <section class="section about-section" id="about" aria-label="About Me">
+      <div class="section-container">
+
+        <!-- Section heading -->
+        <div class="section-header">
+          <span class="section-label">Get to Know Me</span>
+          <h2 class="section-title">About <span class="accent">Me</span></h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- About content grid -->
+        <div class="about-grid">
+
+          <!-- Info Card -->
+          <div class="about-card glass-card reveal-left">
+            <div class="about-card-header">
+              <div class="about-avatar">
+                <span>NS</span>
+              </div>
+              <div>
+                <h3 class="about-name">Nigilmurugan Sasikumar</h3>
+                <p class="about-role">Freelance Web Developer</p>
+              </div>
+            </div>
+
+            <p class="about-bio">
+              Passionate about creating modern websites with clean UI, responsive layouts and
+              engaging user experiences. I combine aesthetic design sensibility with solid
+              front-end skills to build digital products that people love to use.
+            </p>
+
+            <!-- Quick stats -->
+            <div class="about-stats">
+              <div class="about-stat">
+                <span class="stat-number">2+</span>
+                <span class="stat-label">Years Learning</span>
+              </div>
+              <div class="about-stat">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Projects Built</span>
+              </div>
+              <div class="about-stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Dedication</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Card -->
+          <div class="about-timeline reveal-right">
+            <h3 class="timeline-heading">My Journey</h3>
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-card">
+                  <span class="timeline-year">2024</span>
+                  <h4>Started Learning Web Dev</h4>
+                  <p>Began with HTML, CSS and basic JavaScript. Fell in love with building for the web.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-card">
+                  <span class="timeline-year">2025</span>
+                  <h4>Built First Projects</h4>
+                  <p>Completed multiple personal projects and started learning Git & Figma.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-card">
+                  <span class="timeline-year">2026</span>
+                  <h4>Founded NISITE WEBCRAFT</h4>
+                  <p>Launched my freelance brand and started delivering websites for clients.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot timeline-dot-active"></div>
+                <div class="timeline-content glass-card active">
+                  <span class="timeline-year">2026–Now</span>
+                  <h4>Growing & Creating</h4>
+                  <p>Continuously expanding skills, taking on exciting projects, building a strong portfolio.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: SKILLS
+         Animated skill cards with progress rings
+    ============================================================ -->
+    <section class="section skills-section" id="skills" aria-label="My Skills">
+      <div class="section-container">
+
+        <div class="section-header">
+          <span class="section-label">What I Work With</span>
+          <h2 class="section-title">My <span class="accent">Skills</span></h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Skills grid - each card has a progress ring -->
+        <div class="skills-grid">
+
+          <!-- HTML -->
+          <div class="skill-card glass-card reveal-up" data-skill-level="90">
+            <div class="skill-ring-wrapper">
+              <svg class="skill-ring" viewBox="0 0 100 100">
+                <circle class="skill-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="skill-ring-fill" cx="50" cy="50" r="40" data-percentage="90" />
+              </svg>
+              <div class="skill-icon">
+                <!-- HTML Icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-name">HTML</h3>
+            <span class="skill-percent">90%</span>
+          </div>
+
+          <!-- CSS -->
+          <div class="skill-card glass-card reveal-up" data-skill-level="85" style="animation-delay: 0.1s">
+            <div class="skill-ring-wrapper">
+              <svg class="skill-ring" viewBox="0 0 100 100">
+                <circle class="skill-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="skill-ring-fill" cx="50" cy="50" r="40" data-percentage="85" />
+              </svg>
+              <div class="skill-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-name">CSS</h3>
+            <span class="skill-percent">85%</span>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="skill-card glass-card reveal-up" data-skill-level="70" style="animation-delay: 0.2s">
+            <div class="skill-ring-wrapper">
+              <svg class="skill-ring" viewBox="0 0 100 100">
+                <circle class="skill-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="skill-ring-fill" cx="50" cy="50" r="40" data-percentage="70" />
+              </svg>
+              <div class="skill-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-name">JavaScript</h3>
+            <span class="skill-percent">65%</span>
+          </div>
+
+          <!-- Git -->
+          <div class="skill-card glass-card reveal-up" data-skill-level="75" style="animation-delay: 0.3s">
+            <div class="skill-ring-wrapper">
+              <svg class="skill-ring" viewBox="0 0 100 100">
+                <circle class="skill-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="skill-ring-fill" cx="50" cy="50" r="40" data-percentage="75" />
+              </svg>
+              <div class="skill-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.6-.401-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-name">Git</h3>
+            <span class="skill-percent">75%</span>
+          </div>
+
+          <!-- GitHub -->
+          <div class="skill-card glass-card reveal-up" data-skill-level="75" style="animation-delay: 0.4s">
+            <div class="skill-ring-wrapper">
+              <svg class="skill-ring" viewBox="0 0 100 100">
+                <circle class="skill-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="skill-ring-fill" cx="50" cy="50" r="40" data-percentage="75" />
+              </svg>
+              <div class="skill-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-name">GitHub</h3>
+            <span class="skill-percent">70%</span>
+          </div>
+
+          <!-- Figma -->
+          <div class="skill-card glass-card reveal-up" data-skill-level="65" style="animation-delay: 0.5s">
+            <div class="skill-ring-wrapper">
+              <svg class="skill-ring" viewBox="0 0 100 100">
+                <circle class="skill-ring-bg" cx="50" cy="50" r="40" />
+                <circle class="skill-ring-fill" cx="50" cy="50" r="40" data-percentage="65" />
+              </svg>
+              <div class="skill-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.026-4.49 4.515-4.49c2.489 0 4.515 2.014 4.515 4.49S10.661 24 8.172 24zm0-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019 3.019-1.355 3.019-3.019-1.354-3.019-3.019-3.019zm7.705 7.509h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49S18.353 24 15.877 24zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-name">Figma</h3>
+            <span class="skill-percent">65%</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: PROJECTS
+         3 project cards with hover tilt and glass effect
+    ============================================================ -->
+    <section class="section projects-section" id="projects" aria-label="My Projects">
+      <div class="section-container">
+
+        <div class="section-header">
+          <span class="section-label">What I've Built</span>
+          <h2 class="section-title">My <span class="accent">Projects</span></h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- Project 1 -->
+          <article class="project-card glass-card tilt-card reveal-up">
+            <div class="project-image">
+              <div class="project-img-placeholder">
+                <img src="img/project1.png" alt="Project Image not found">
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="btn btn-small magnetic-btn" aria-label="Live Demo" target="_blank"
+                    rel="noopener">Live Demo</a>
+                  <a href="#" class="btn btn-small btn-outline magnetic-btn" aria-label="GitHub" target="_blank"
+                    rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">HTML</span>
+                <span class="project-tag">CSS</span>
+                <span class="project-tag">JS</span>
+                <span class="project-tag">Local SEO Optimization</span>
+                
+              </div>
+              <h3 class="project-title">Business Website</h3>
+              <p class="project-desc">A modern, responsive business website for a borewell drilling company with a professional design, smooth animations, and optimized user experience.</p>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card glass-card tilt-card reveal-up" style="animation-delay: 0.15s">
+            <div class="project-image">
+              <div class="project-img-placeholder">
+                <img src="img/project2.png" alt="portfolio image not found">
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="btn btn-small magnetic-btn" aria-label="Live Demo" target="_blank"
+                    rel="noopener">Live Demo</a>
+                  <a href="#" class="btn btn-small btn-outline magnetic-btn" aria-label="GitHub" target="_blank"
+                    rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">HTML</span>
+                <span class="project-tag">CSS</span>
+                <span class="project-tag">JS</span>
+              </div>
+              <h3 class="project-title">Portfolio Website</h3>
+              <p class="project-desc">A modern, responsive portfolio showcasing my web development skills, featured projects, and services with smooth animations, clean UI, and an engaging user experience.</p>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card glass-card tilt-card reveal-up" style="animation-delay: 0.3s">
+            <div class="project-image">
+              <div class="project-img-placeholder">
+                <span>🛒</span>
+                <p>Project Image</p>
+              </div>
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="#" class="btn btn-small magnetic-btn" aria-label="Live Demo" target="_blank"
+                    rel="noopener">Live Demo</a>
+                  <a href="#" class="btn btn-small btn-outline magnetic-btn" aria-label="GitHub" target="_blank"
+                    rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="project-tag">HTML</span>
+                <span class="project-tag">CSS</span>
+                <span class="project-tag">Git</span>
+              </div>
+              <h3 class="project-title">E-Commerce Frontend</h3>
+              <p class="project-desc">A fully responsive e-commerce product page with cart UI, product filtering, and mobile-first design.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: SERVICES
+    ============================================================ -->
+    <section class="section services-section" id="services">
+      <div class="section-container">
+
+        <div class="section-header">
+          <span class="section-label">What I Offer</span>
+          <h2 class="section-title">My <span class="accent">Services</span></h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="section-box1">
+            <div class="section-box2" >
+                <p class=" section-soln">01</p>
+                <h2 class="section-heading">Website Design</h2>
+                <p class="section-para">Custom, brand-driven design systems built for clarity and conversion.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">02</p>
+                <h2 class="section-heading">Portfolio Websites</h2>
+                <p class="section-para">Personal sites that present your work with the polish it deserves.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">03</p>
+                <h2 class="section-heading">Business Websites</h2>
+                <p class="section-para">Fast, credible sites that turn visitors into customers.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">04</p>
+                <h2 class="section-heading">Landing Pages</h2>
+                <p class="section-para">Focused, high-converting pages for launches and campaigns.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">05</p>
+                <h2 class="section-heading">UI/UX Design</h2>
+                <p class="section-para">Wireframes to high-fidelity interfaces, grounded in usability.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">06</p>
+                <h2 class="section-heading">Website Optimization</h2>
+                <p class="section-para">Performance audits and fixes for speed, SEO and accessibility.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">07</p>
+                <h2 class="section-heading">Website Redesign</h2>
+                <p class="section-para">Modernizing existing sites without losing what already works.</p>
+            </div>
+            <div class="section-box2">
+                <p class=" section-soln">08</p>
+                <h2 class="section-heading">Maintenance & Support</h2>
+                <p class="section-para">Ongoing updates, fixes and monitoring after launch.</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: CONTACT
+         Split layout – contact info left, form right
+    ============================================================ -->
+    <section class="section contact-section" id="contact" aria-label="Contact Me">
+      <div class="section-container">
+
+        <div class="section-header">
+          <span class="section-label">Get In Touch</span>
+          <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- LEFT: Contact Info -->
+          <div class="contact-info reveal-left">
+            <h3 class="contact-info-title">Ready to Start a Project?</h3>
+            <p class="contact-info-text">
+              Whether you need a brand new website or a complete redesign, I'm here to help.
+              Let's build something amazing together.
+            </p>
+
+            <!-- Contact details -->
+            <div class="contact-details">
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="contact-detail-label">Email</p>
+                  <p class="contact-detail-value">hello@nisitewebcraft.com</p>
+                </div>
+              </div>
+
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17l3-.013a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.47a16 16 0 0 0 5.61 5.61l.87-.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="contact-detail-label">Phone</p>
+                  <p class="contact-detail-value">+91 00000 00000</p>
+                </div>
+              </div>
+
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="contact-detail-label">Location</p>
+                  <p class="contact-detail-value">Tamil Nadu, India</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social icons in contact section -->
+            <div class="contact-socials">
+              <a href="#" class="social-icon magnetic-btn" aria-label="GitHub" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+              </a>
+              <a href="#" class="social-icon magnetic-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+              <a href="#" class="social-icon magnetic-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT: Contact Form -->
+          <div class="contact-form-wrapper reveal-right">
+            <form class="contact-form glass-card" id="contactForm" novalidate>
+
+              <!-- Success message (hidden by default) -->
+              <div class="form-success" id="formSuccess">
+                <div class="success-icon">✅</div>
+                <h3>Message Sent!</h3>
+                <p>Thank you! I'll get back to you within 24 hours.</p>
+              </div>
+
+              <!-- Form fields -->
+              <div class="form-fields" id="formFields">
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="text" id="formName" name="name" class="form-input" placeholder=" " required autocomplete="name" />
+                    <label class="form-label" for="formName">Full Name *</label>
+                    <span class="form-error" id="nameError"></span>
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="formEmail" name="email" class="form-input" placeholder=" " required autocomplete="email" />
+                    <label class="form-label" for="formEmail">Email Address *</label>
+                    <span class="form-error" id="emailError"></span>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="tel" id="formPhone" name="phone" class="form-input" placeholder=" " autocomplete="tel" />
+                    <label class="form-label" for="formPhone">Phone Number</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="formSubject" name="subject" class="form-input" placeholder=" " required />
+                    <label class="form-label" for="formSubject">Subject *</label>
+                    <span class="form-error" id="subjectError"></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <textarea id="formMessage" name="message" class="form-input form-textarea" placeholder=" " required rows="5"></textarea>
+                  <label class="form-label" for="formMessage">Your Message *</label>
+                  <span class="form-error" id="messageError"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full magnetic-btn" id="submitBtn">
+                  <span class="btn-text">Send Message</span>
+                  <span class="btn-loading" style="display:none;">Sending...</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       Glass footer with logo, links, and copyright
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+
+      <!-- Top section of footer -->
+      <div class="footer-top">
+        <!-- Logo placeholder -->
+        <div class="footer-logo-wrapper">
+          <div class="footer-logo-placeholder">🌐</div>
+          <div class="footer-brand">
+            <span class="footer-brand-name">NISITE <span class="accent">WEBCRAFT</span></span>
+            <span class="footer-brand-tagline">Crafting Digital Excellence</span>
+          </div>
+        </div>
+
+        <!-- Footer social icons -->
+        <div class="footer-socials">
+          <a href="#" class="social-icon magnetic-btn" aria-label="GitHub" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+            </svg>
+          </a>
+          <a href="#" class="social-icon magnetic-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="#" class="social-icon magnetic-btn" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Divider line -->
+      <div class="footer-divider"></div>
+
+      <!-- Bottom: copyright -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Nigilmurugan Sasikumar. All rights reserved.</p>
+        <p class="footer-powered">Powered by <strong>NISITE WEBCRAFT</strong></p>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+        <polyline points="18,15 12,9 6,15" />
+      </svg>
+    </button>
+  </footer>
+
+  <!-- Link to our JavaScript file (placed at end of body for performance) -->
+  <script src="script.js"></script>
+</body>
+
+</html>
