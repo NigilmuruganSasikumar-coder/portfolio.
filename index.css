@@ -868,42 +868,6 @@ body.cursor-hover .cursor-ring {
   align-items: center;
 }
 
-/* Scroll indicator at bottom */
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.7rem;
-  color: var(--color-grey-3);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  animation: bounceDown 2s ease-in-out infinite;
-}
-
-.scroll-mouse {
-  width: 24px;
-  height: 38px;
-  border: 1.5px solid rgba(255,255,255,0.2);
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
-}
-
-.scroll-wheel {
-  width: 4px;
-  height: 8px;
-  background: var(--color-cyan);
-  border-radius: 2px;
-  animation: scrollWheel 1.5s ease-in-out infinite;
-}
-
-
 /* ================================================================
    11. LOGO / BRAND SECTION
 ================================================================ */
